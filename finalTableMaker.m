@@ -141,7 +141,7 @@ function topString = bestFeatureSet(participantNumber, variable, wasUnread, supe
     
     sfo = ['P' Params.sfo_p];
     partString = sprintf(sfo, participantNumber);
-    partDir = ['results_' partString '_' num2str(iterations)];
+    partDir = [Params.outdir filesep 'results_' partString '_' num2str(iterations)];
     if wasUnread
         appendage = '-only unread.mat';
     else
@@ -223,7 +223,7 @@ function [finding, auc] = wasItSignificant(matfile, variable, predictor)
     
     if prediction.pval < 0.05
         finding = 1;
-        auc = previction.auc;
+        auc = prediction.auc;
     else
         finding = 0;
     end
