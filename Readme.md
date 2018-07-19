@@ -87,6 +87,16 @@ finalTableMaker([1 2 3 4], 500)
 
 will parse through all the needed `results_PXX_500` folders (where PXX is the participant number) and compute a final table that summarises all randomisation results for all the given participants under the `results_final_500 folder`. This final table will be called `finalTable.csv` and will be outputted in the target directory. It will contain how often a given feature set was significant and which was its average AUC. Feature sets are defined in [SetCollection.m](SetCollection.m). It will also output a `participantTable.csv`, which report which was the "best" feature set for each participant (i.e. the feature set that obtained the highest AUC for that participant).
 
+## Pushing tags
+
+Once we have a set of results (generated during the classification step described above) we can send tags back to the server using [pushResults.m](pushResults.m). We need to specify the server details from which e-mail data was originally obtained.
+
+```
+pushResults('imap.example.com', 'username', 'password');
+```
+
+This will run through the classification results, searching for individual e-mails for which any tag was estimated with a probability of at least 75%. Found e-mails will be tagged with the variable name of interest, sent as an IMAP flag. For example, this procedure may tag a few e-mails as spam by adding to them an IMAP flag named `spam`.
+
 # Data specification
 
 each JSON corresponds to an AugmentedMessage (as defined in [https://github.com/ForSubmission/MailPhys](https://github.com/ForSubmission/MailPhys)).

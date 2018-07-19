@@ -13,7 +13,7 @@ for i = 1 : repetitions
     shuffledVariable = table.(variable);
     shuffledVariable = shuffledVariable(randperm(size(shuffledVariable, 1)));
     table.(variable) = shuffledVariable;
-    [inSampleLosses(i), outSampleLosses(i), Xs{i}, Ys{i}, Ts{i}, aucs(i)] = classify(table, variable, predictors);
+    [inSampleLosses(i), outSampleLosses(i), Xs{i}, Ys{i}, Ts{i}, aucs(i), ~] = classify(table, variable, predictors);
 end
 
 end

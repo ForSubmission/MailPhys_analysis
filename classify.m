@@ -1,4 +1,4 @@
-function [inSampleLoss, outSampleLoss, X, Y, T, auc] = classify(table, variable, predictors)
+function [inSampleLoss, outSampleLoss, X, Y, T, auc, score_svm] = classify(table, variable, predictors)
 % classify data for the given variable using the given predictor
 
 % svm

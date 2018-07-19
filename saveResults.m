@@ -158,7 +158,7 @@ function result = classifyOnVariable(table, variable, descriptor)
     for i = 1:size(descriptor.featureSets, 1)
         predictors = descriptor.featureSets{i, 2};
         lastwarn('');
-        [inSampleLoss, outSampleLoss, X, Y, T, auc] = classify(table, variable, predictors);
+        [inSampleLoss, outSampleLoss, X, Y, T, auc, score_svm] = classify(table, variable, predictors);
         if ~isempty(lastwarn)
             warnstring = ['For ' variable ' using ' descriptor.featureSets{i, 1} ':' lastwarn];
             descriptor.warnings = horzcat(descriptor.warnings, warnstring);
@@ -183,9 +183,11 @@ function result = classifyOnVariable(table, variable, descriptor)
         result.predictions{i}.X = X;
         result.predictions{i}.Y = Y;
         result.predictions{i}.T = T;
+        result.predictions{i}.score_svm = score_svm;
         result.predictions{i}.auc = auc;
     end
     
+    result.table = table;
     result.sNaiveAcc = superNaive(table, variable);
     result.variable = variable;
     
