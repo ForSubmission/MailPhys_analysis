@@ -39,6 +39,13 @@ function senderAnalysis_stats(participants)
         cattable = vertcat(cattable, subtab);
     end
     
+    % tabulate unique senders to compute overall stats
+    tbl = tabulate(cattable.from);
+    uniqueFreqs = cell2mat(tbl(:,2));
+    disp(['Median number of unique senders across all: ' num2str(median(uniqueFreqs)) ]);
+    disp(['Mean number of unique senders across all: ' num2str(mean(uniqueFreqs)) ]);
+    disp(['Std of unique senders across all: ' num2str(std(uniqueFreqs)) ]);
+    
     % convert sender into numbers
     [senderStrings, ~, uniqueIndex] = unique(cattable.from);
     cattable.senderNum = categorical(uniqueIndex);
